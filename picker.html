@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Picker - 株ノートNOBIRU</title>
+</head>
+<body style="margin:0;padding:0;background:#fff;">
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+  var config = null;
+  var apiLoaded = false;
+
+  function post(msg) {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(msg));
+    }
+  }
+
+  function onApiLoad() {
+    gapi.load('picker', { callback: function () {
+      apiLoaded = true;
+      maybeCreatePicker();
+    } });
+  }
+
+  function maybeCreatePicker() {
+    if (apiLoaded && config) {
+      createPicker();
+    }
+  }
+
+  function createPicker() {
+    try {
+      var view = new google.picker.DocsView(google.picker.ViewId.SPREADSHEETS);
+      view.setIncludeFolders(false);
+      if (config.preselectFileId) {
+        view.setFileIds(config.preselectFileId);
+      }
+      var picker = new google.picker.PickerBuilder()
+        .addView(view)
+        .setOAuthToken(config.accessToken)
+        .setDeveloperKey(config.apiKey)
+        .setCallback(pickerCallback)
+        .build();
+      picker.setVisible(true);
+    } catch (e) {
+      post({ type: 'error', message: String(e) });
+    }
+  }
+
+  function pickerCallback(data) {
+    if (data.action === google.picker.Action.PICKED) {
+      var doc = data.docs[0];
+      post({ type: 'picked', fileId: doc.id, fileName: doc.name });
+    } else if (data.action === google.picker.Action.CANCEL) {
+      post({ type: 'cancel' });
+    }
+  }
+
+  function handleMessage(event) {
+    try {
+      config = JSON.parse(event.data);
+      maybeCreatePicker();
+    } catch (e) {
+      post({ type: 'error', message: 'bad config: ' + String(e) });
+    }
+  }
+
+  // react-native-webviewのpostMessageは、Androidはdocumentに、iOSはwindowに
+  // messageイベントを発火するため両方に登録する。
+  document.addEventListener('message', handleMessage);
+  window.addEventListener('message', handleMessage);
+
+  window.onload = onApiLoad;
+</script>
+</body>
+</html>

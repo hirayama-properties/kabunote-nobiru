@@ -38,11 +38,11 @@
 
   function createPicker() {
     try {
+      // TEMP DIAGNOSTIC: setFileIds()による事前選択が、正規のユーザー操作としての
+      // 選択と見なされずアクセス許可が確立しない不具合の切り分けのため、
+      // 一時的に無効化している（ユーザーに手動で一覧から選んでもらう）。
       var view = new google.picker.DocsView(google.picker.ViewId.SPREADSHEETS);
       view.setIncludeFolders(false);
-      if (config.preselectFileId) {
-        view.setFileIds(config.preselectFileId);
-      }
       var picker = new google.picker.PickerBuilder()
         .addView(view)
         .setOAuthToken(config.accessToken)

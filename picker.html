@@ -8,7 +8,11 @@
 <body style="margin:0;padding:0;background:#fff;">
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
-  var config = null;
+  // window.__NOBIRU_PICKER_CONFIG__は、react-native-webviewの
+  // injectedJavaScriptBeforeContentLoadedによってこのページの他のスクリプトより
+  // 先に注入される（postMessageによる受け渡しだと、リロード直後にリスナー登録が
+  // 間に合わないレースコンディションでconfigが失われることがあったため）。
+  var config = window.__NOBIRU_PICKER_CONFIG__ || null;
   var apiLoaded = false;
 
   function post(msg) {
@@ -25,8 +29,10 @@
   }
 
   function maybeCreatePicker() {
-    if (apiLoaded && config) {
+    if (apiLoaded && config && config.accessToken && config.apiKey) {
       createPicker();
+    } else if (apiLoaded && !config) {
+      post({ type: 'error', message: 'picker config missing (accessToken/apiKey not injected)' });
     }
   }
 
@@ -57,20 +63,6 @@
       post({ type: 'cancel' });
     }
   }
-
-  function handleMessage(event) {
-    try {
-      config = JSON.parse(event.data);
-      maybeCreatePicker();
-    } catch (e) {
-      post({ type: 'error', message: 'bad config: ' + String(e) });
-    }
-  }
-
-  // react-native-webviewのpostMessageは、Androidはdocumentに、iOSはwindowに
-  // messageイベントを発火するため両方に登録する。
-  document.addEventListener('message', handleMessage);
-  window.addEventListener('message', handleMessage);
 
   window.onload = onApiLoad;
 </script>

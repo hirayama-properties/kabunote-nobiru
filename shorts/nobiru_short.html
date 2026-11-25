@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>株ノートNOBIRU YouTubeショート</title>
+<link rel="stylesheet" href="node_modules/@fontsource/noto-sans-jp/500.css">
+<link rel="stylesheet" href="node_modules/@fontsource/noto-sans-jp/700.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0e1015; --card:#171a21; --text:#eef1f5; --sub:#96a0b0; --border:#2a2f3a;
+  --red:#ef5451; --blue:#5b9bef;
+}
+html,body{width:1080px;height:1920px;background:var(--bg);overflow:hidden;
+  font-family:'Noto Sans JP',sans-serif;font-weight:700;color:var(--text);font-feature-settings:"palt"}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:
+    radial-gradient(1500px 900px at 10% -4%, rgba(239,84,81,0.20), transparent 62%),
+    radial-gradient(1300px 800px at 96% 2%, rgba(91,155,239,0.18), transparent 62%),
+    var(--bg)}
+#noise{position:absolute;left:0;top:0;width:1080px;height:1920px;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='256' height='256' filter='url(%23n)'/></svg>")}
+.scene{position:absolute;left:0;top:0;width:1080px;height:1920px;visibility:hidden}
+.col{position:absolute;left:120px;width:840px;text-align:center;white-space:nowrap}
+.abs{position:absolute}
+.red{color:var(--red)} .blue{color:var(--blue)} .sub{color:var(--sub)}
+.l{line-height:1.25}
+
+/* phone frame: same construction as the LP (dark border, card padding, black notch) */
+.phone{position:absolute;background:var(--card);border-style:solid;border-color:var(--border);overflow:hidden}
+.screen{position:relative;overflow:hidden;background:#000}
+.inner{position:absolute;left:0;top:0;width:1080px;height:2400px;transform-origin:0 0}
+.inner img{display:block;width:1080px;height:2400px}
+.notch{position:absolute;left:50%;background:#000}
+
+/* store badges (same markup/colours as the LP) */
+.badges{position:absolute;left:120px;width:840px;display:flex;justify-content:center;gap:16px}
+.badge{display:flex;align-items:center;gap:12px;background:#f5f7fa;color:#12151c;padding:10px 22px;border-radius:12px;min-width:190px;white-space:nowrap}
+.badge .t{display:flex;flex-direction:column;line-height:1.25}
+.badge .t span:first-child{font-size:11px;font-weight:500}
+.badge .t span:last-child{font-size:17px;font-weight:700}
+.play{width:26px;height:26px;flex-shrink:0;clip-path:polygon(0% 0%,0% 100%,100% 50%);background:linear-gradient(135deg,#00d2ff 0%,#3ae374 35%,#ffd32a 65%,#ff3f34 100%)}
+
+/* highlight ring / bubble */
+.ring{position:absolute;border:9px solid var(--red);border-radius:36px}
+.tag-hl{position:absolute;border:8px solid var(--red);border-radius:50px;background:rgba(239,84,81,0.20)}
+.bubble{position:absolute;background:var(--red);color:#fff;border-radius:30px;padding:22px 0;text-align:center;font-size:54px;line-height:1.2;white-space:nowrap;
+  box-shadow:0 18px 50px rgba(239,84,81,0.35)}
+.bubble::before{content:'';position:absolute;top:-24px;left:var(--tail,120px);border:20px solid transparent;border-top:0;border-bottom:26px solid var(--red)}
+
+.pill{position:absolute;display:flex;align-items:center;gap:16px;background:var(--card);border:2px solid var(--border);border-radius:20px;padding:0 30px;height:84px;font-size:40px;white-space:nowrap}
+.ico{width:44px;height:44px;border-radius:10px;flex-shrink:0;position:relative}
+.ico.sheet{background:#1e8e3e}
+.ico.sheet::before{content:'';position:absolute;left:11px;top:9px;width:22px;height:26px;border:3px solid #fff;border-radius:3px;
+  background:linear-gradient(#fff,#fff) 0 8px/100% 3px no-repeat,linear-gradient(#fff,#fff) 0 16px/100% 3px no-repeat,linear-gradient(#fff,#fff) 7px 0/3px 100% no-repeat}
+.ico.notion{background:#fff;color:#111;font-size:30px;font-weight:700;display:flex;align-items:center;justify-content:center;border:3px solid #111}
+.dot{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--blue);box-shadow:0 0 24px 6px rgba(91,155,239,0.7)}
+.note{position:absolute;left:120px;width:840px;display:flex;justify-content:center;font-size:30px;font-weight:500;color:var(--sub);white-space:nowrap}
+.note span{padding:8px 26px;border-radius:999px}
+.note.pill-bg span{background:rgba(14,16,21,0.92);color:#d5dbe5;border:2px solid var(--border)}
+
+#guides{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none;z-index:99;display:none}
+#guides div{position:absolute;background:rgba(255,0,255,0.28)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="noise"></div>
+
+  <!-- ===== S1 フック 0.0-2.5 ===== -->
+  <section class="scene" id="sc1">
+    <div class="col l" id="s1a" style="top:640px;font-size:116px">損益管理だけで</div>
+    <div class="col l red" id="s1b" style="top:800px;font-size:116px">終わってない？</div>
+    <div class="abs" id="s1u" style="left:190px;top:960px;width:700px;height:10px;border-radius:5px;background:var(--red);transform-origin:left center"></div>
+  </section>
+
+  <!-- ===== S2 記録 2.5-6.0 ===== -->
+  <section class="scene" id="sc2">
+    <img class="abs" id="s2logo" src="../nobiru_logo_light.png" style="left:360px;top:178px;width:360px;height:72px">
+    <div class="col l" id="s2a" style="top:272px;font-size:68px">売買の“根拠”と“感情”を</div>
+    <div class="col l" id="s2b" style="top:360px;font-size:96px">ワンタップで<span class="red">記録</span></div>
+    <div id="s2phone"></div>
+  </section>
+
+  <!-- ===== S3 分析 6.0-10.5 ===== -->
+  <section class="scene" id="sc3">
+    <div class="col l" id="s3a" style="top:168px;font-size:100px">自分の投資の</div>
+    <div class="col l" id="s3b" style="top:296px;font-size:100px"><span class="red">癖</span>が見える</div>
+    <div class="col" id="s3c" style="top:432px;font-size:46px;font-weight:500;color:var(--sub)">勝ち癖も、負け癖も、数字でわかる</div>
+    <div id="s3phone"></div>
+    <div class="bubble" id="s3bubble">焦って買うと勝率0%</div>
+    <div class="note pill-bg" id="s3note" style="top:1436px"><span>※画面はサンプルデータです</span></div>
+  </section>
+
+  <!-- ===== S4 同期 10.5-14.5 ===== -->
+  <section class="scene" id="sc4">
+    <div class="col l" id="s4a" style="top:168px;font-size:62px">スプレッドシート / Notion に</div>
+    <div class="col l" id="s4b" style="top:252px;font-size:116px">自動で<span class="blue">同期</span></div>
+    <div id="s4phone"></div>
+    <div class="abs" id="s4line" style="left:538px;top:1040px;width:4px;height:96px;background:linear-gradient(var(--blue),rgba(91,155,239,0.2));border-radius:2px"></div>
+    <div class="abs" id="s4head" style="left:518px;top:1128px;border:22px solid transparent;border-top:28px solid var(--blue);border-bottom:0;width:0;height:0"></div>
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+    <div class="abs" style="left:120px;top:1186px;width:840px;display:flex;justify-content:center;gap:28px">
+      <div class="pill" id="s4p1" style="position:relative"><span class="ico sheet"></span>スプレッドシート</div>
+      <div class="pill" id="s4p2" style="position:relative"><span class="ico notion">N</span>Notion</div>
+    </div>
+    <div class="abs" id="s4card" style="left:120px;top:1304px;width:840px;height:184px;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+      <img src="../取引履歴.png" style="display:block;width:840px;height:184px">
+    </div>
+    <div class="abs" id="s4sweep" style="top:1304px;width:6px;height:184px;background:var(--blue);box-shadow:0 0 30px 8px rgba(91,155,239,0.8);border-radius:3px"></div>
+  </section>
+
+  <!-- ===== S5 両OS 14.5-17.0 ===== -->
+  <section class="scene" id="sc5">
+    <div class="col l" id="s5a" style="top:168px;font-size:96px">iOSもAndroidも</div>
+    <div class="col l" id="s5b" style="top:292px;font-size:96px">どちらでも<span class="red">使える</span></div>
+    <div id="s5p1"></div><div id="s5p2"></div>
+    <div class="badges" id="s5badges" style="top:1318px"></div>
+  </section>
+
+  <!-- ===== S6 CTA 17.0-20.0 ===== -->
+  <section class="scene" id="sc6">
+    <div class="abs" id="s6glow" style="left:90px;top:360px;width:900px;height:900px;border-radius:50%;background:radial-gradient(closest-side,rgba(239,84,81,0.22),transparent)"></div>
+    <img class="abs" id="s6logo" src="../nobiru_logo_light.png" style="left:160px;top:490px;width:760px;height:152px">
+    <div class="col l" id="s6a" style="top:700px;font-size:96px">株ノートNOBIRU</div>
+    <div class="col l" id="s6b" style="top:850px;font-size:46px">App Store・Google Playで配信中</div>
+    <div class="col l blue" id="s6c" style="top:938px;font-size:56px">kabunote-nobiru.com</div>
+    <div class="badges" id="s6badges" style="top:1110px"></div>
+    <div class="note" id="s6note" style="top:1474px"><span>※投資助言ではありません</span></div>
+  </section>
+
+  <div id="guides"></div>
+</div>
+
+<script>
+const W=1080,H=1920,FPS=30,DUR=20;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eb=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const ap=(t,s,d,e=eo)=>e(clamp((t-s)/d));
+const $=id=>document.getElementById(id);
+
+/* generic reveal: fade + slide + optional scale, all derived from t */
+function rev(id,t,s,d,o={}){
+  const {dx=0,dy=50,sc=1,e=eo}=o, el=$(id);
+  const k=ap(t,s,d,e), op=clamp((t-s)/(d*.55));
+  el.style.opacity=op;
+  el.style.transform=`translate(${dx*(1-k)}px,${dy*(1-k)}px) scale(${1+(sc-1)*(1-k)})`;
+}
+function raw(el,op,tf){el.style.opacity=op;el.style.transform=tf}
+
+/* ---------- builders ---------- */
+function phoneHTML(id,src,w,h,offY,inner){
+  const s=w/1080,b=Math.round(w*.024),p=Math.round(w*.018),r=Math.round(w*.115);
+  const ow=w+2*(b+p),oh=h+2*(b+p);
+  const html=`<div class="phone" id="${id}" style="width:${ow}px;height:${oh}px;border-width:${b}px;padding:${p}px;border-radius:${r}px">
+    <div class="screen" style="width:${w}px;height:${h}px;border-radius:${r-b-p}px">
+      <div class="inner" style="transform:translateY(${-offY*s}px) scale(${s})"><img src="${src}">${inner||''}</div>
+    </div>
+    <div class="notch" style="width:${w*.27}px;height:${w*.048}px;margin-left:${-w*.135}px;top:${p*.35}px;border-radius:0 0 ${w*.03}px ${w*.03}px"></div>
+  </div>`;
+  return {html,ow,oh,s,b,p,w,h,offY};
+}
+function mountPhone(host,spec,left,top,fade){
+  $(host).innerHTML=spec.html;
+  const el=$(host).firstChild;
+  el.style.left=left+'px';el.style.top=top+'px';
+  if(fade){const m=`linear-gradient(#000 calc(100% - ${fade}px),transparent)`;el.style.webkitMaskImage=m;el.style.maskImage=m;}
+  return el;
+}
+const badgesHTML=`
+  <div class="badge"><div class="play"></div><div class="t"><span>Google Play で</span><span>ダウンロード</span></div></div>
+  <div class="badge"><svg width="24" height="24" viewBox="0 0 384 512" style="flex-shrink:0"><path fill="#12151c" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+  <div class="t"><span>App Store で</span><span>ダウンロード</span></div></div>`;
+$('s5badges').innerHTML=`<div style="display:flex;gap:16px;zoom:1.7">${badgesHTML}</div>`;$('s6badges').innerHTML=`<div style="display:flex;gap:16px;zoom:2">${badgesHTML}</div>`;
+
+/* S2: tag-selection screen with two tap highlights (投資根拠 / 感情) */
+const P2=phoneHTML('p2','../screenshots/Screenshot_20260803-223535.png',520,1156,0,
+  `<div class="tag-hl" id="hl1" style="left:38px;top:1474px;width:128px;height:90px"></div>
+   <div class="tag-hl" id="hl2" style="left:38px;top:1702px;width:196px;height:90px"></div>
+   <div class="abs" id="rp1" style="left:56px;top:1473px;width:90px;height:90px;border-radius:50%;border:6px solid var(--red)"></div>
+   <div class="abs" id="rp2" style="left:56px;top:1701px;width:90px;height:90px;border-radius:50%;border:6px solid var(--red)"></div>`);
+const P2left=(W-P2.ow)/2,P2top=548;
+mountPhone('s2phone',P2,P2left,P2top,0);
+
+/* S3: analysis screen, ring around the 焦り row (orig coords 28..1052 x 638..750) */
+const P3=phoneHTML('p3','../screenshots/Screenshot_20260803-223602.png',600,1333,0,
+  `<div class="ring" id="ring" style="left:22px;top:636px;width:1036px;height:116px;box-shadow:0 0 40px rgba(239,84,81,.8),inset 0 0 30px rgba(239,84,81,.35)"></div>`);
+const P3left=(W-P3.ow)/2,P3top=540;
+mountPhone('s3phone',P3,P3left,P3top,0);
+(()=>{ // bubble sits right under the ring, tail pointing up at it
+  const ringBottom=P3top+P3.b+P3.p+752*P3.s;
+  const bw=640,bl=(W-bw)/2+40,bt=ringBottom+34;
+  const el=$('s3bubble');el.style.width=bw+'px';el.style.left=bl+'px';el.style.top=bt+'px';
+  el.style.setProperty('--tail','150px');
+})();
+
+/* S4: settings screen cropped to the 外部連携設定 area */
+const P4=phoneHTML('p4','../screenshots/Screenshot_20260803-223739.png',560,560,0,'');
+const P4left=(W-P4.ow)/2,P4top=452;
+mountPhone('s4phone',P4,P4left,P4top,150);
+
+/* S5: dark + light phones */
+const P5a=phoneHTML('p5a','../screenshots/Screenshot_20260804-120727.png',340,755,0,'');
+const P5b=phoneHTML('p5b','../screenshots/Screenshot_20260803-223514.png',340,755,0,'');
+const gap=44,totalW=P5a.ow+gap+P5b.ow,x0=(W-totalW)/2;
+mountPhone('s5p1',P5a,x0,476,0);
+mountPhone('s5p2',P5b,x0+P5a.ow+gap,476,0);
+
+/* ---------- scene windows (cross-fade ±0.2s around each boundary) ---------- */
+const SC=[['sc1',0,2.5],['sc2',2.5,6],['sc3',6,10.5],['sc4',10.5,14.5],['sc5',14.5,17],['sc6',17,20]];
+function sceneVis(t){
+  for(const [id,a,b] of SC){
+    const el=$(id);
+    const inK=a===0?1:clamp((t-(a-.2))/.4);
+    const outK=b>=DUR?0:clamp((t-(b-.2))/.4);
+    const o=inK*(1-outK);
+    el.style.visibility=o>0.001?'visible':'hidden';
+    el.style.opacity=o;
+    el.style.transform=`translateY(${-34*eio(outK)}px)`;
+  }
+}
+
+/* ---------- main: everything is a pure function of t ---------- */
+window.setTime=function(t){
+  sceneVis(t);
+
+  // S1
+  rev('s1a',t,.12,.8,{dy:80});
+  rev('s1b',t,.55,.8,{dy:80});
+  raw($('s1u'),clamp((t-1.35)/.2),`scaleX(${ap(t,1.35,.6)})`);
+
+  // S2
+  rev('s2logo',t,2.65,.6,{dy:30});
+  rev('s2a',t,2.8,.6,{dy:40});
+  rev('s2b',t,2.95,.6,{dy:40});
+  {
+    const k=ap(t,2.8,.85), el=$('p2');
+    raw(el,clamp((t-2.8)/.3),`translateY(${(1-k)*900}px)`);
+    for(const [hl,rp,t0] of [['hl1','rp1',4.1],['hl2','rp2',4.7]]){
+      const pk=ap(t,t0,.45,eb), rk=clamp((t-t0)/.7);
+      raw($(hl),clamp((t-t0)/.15),`scale(${.6+.4*pk})`);
+      raw($(rp),rk>0&&rk<1?(1-rk)*.9:0,`scale(${.6+rk*1.8})`);
+    }
+  }
+
+  // S3
+  rev('s3a',t,6.1,.6,{dy:40});
+  rev('s3b',t,6.25,.6,{dy:40});
+  rev('s3c',t,6.6,.6,{dy:30});
+  {
+    const k=ap(t,6.2,.8), el=$('p3');
+    raw(el,clamp((t-6.2)/.35),`translateY(${(1-k)*160}px)`);
+    const rk=ap(t,7.5,.5,eb), glow=.5+.5*Math.sin(Math.max(0,t-7.5)*6.5);
+    const ring=$('ring');
+    ring.style.opacity=clamp((t-7.5)/.15);
+    ring.style.transform=`scale(${1+.12*(1-rk)})`;
+    ring.style.boxShadow=`0 0 ${30+30*glow}px rgba(239,84,81,${.55+.35*glow}),inset 0 0 30px rgba(239,84,81,.35)`;
+    const bk=ap(t,8.05,.5,eb), b=$('s3bubble');
+    raw(b,clamp((t-8.05)/.2),`translateY(${(1-bk)*30}px) scale(${.7+.3*bk})`);
+    b.style.transformOrigin='190px 0';
+    rev('s3note',t,6.8,.6,{dy:0});
+  }
+
+  // S4
+  rev('s4a',t,10.6,.6,{dy:40});
+  rev('s4b',t,10.75,.6,{dy:40});
+  {
+    const k=ap(t,10.7,.8), el=$('p4');
+    raw(el,clamp((t-10.7)/.3),`translateY(${(1-k)*140}px)`);
+    const lk=clamp((t-11.35)/.4);
+    $('s4line').style.opacity=lk;$('s4head').style.opacity=lk;
+    // pulses travel phone -> destinations, looping
+    for(let i=0;i<4;i++){
+      const ph=(((t-11.4)/1.0)+i/4)%1, on=t>11.4;
+      const y=1034+ph*96;
+      raw($('d'+i),on?Math.sin(Math.PI*ph):0,`translate(527px,${y}px)`);
+    }
+    rev('s4p1',t,11.45,.5,{dy:30,sc:.92,e:eb});
+    rev('s4p2',t,11.6,.5,{dy:30,sc:.92,e:eb});
+    const ck=ap(t,11.9,1.1,eio), card=$('s4card');
+    card.style.opacity=clamp((t-11.9)/.2);
+    card.style.clipPath=`inset(0 ${100*(1-ck)}% 0 0 round 14px)`;
+    const sw=$('s4sweep');
+    sw.style.left=(120+840*ck-3)+'px';
+    sw.style.opacity=(ck>0&&ck<1)?1:0;
+  }
+
+  // S5
+  rev('s5a',t,14.6,.55,{dy:40});
+  rev('s5b',t,14.72,.55,{dy:40});
+  rev('s5p1',t,14.65,.7,{dx:-260,dy:60});
+  rev('s5p2',t,14.8,.7,{dx:260,dy:60});
+  rev('s5badges',t,15.45,.55,{dy:30,sc:.9,e:eb});
+
+  // S6
+  rev('s6logo',t,17.1,.7,{dy:30,sc:.9,e:eb});
+  rev('s6a',t,17.4,.6,{dy:40});
+  rev('s6b',t,17.65,.6,{dy:40});
+  rev('s6c',t,17.9,.6,{dy:40});
+  rev('s6badges',t,18.1,.6,{dy:40,sc:.9,e:eb});
+  rev('s6note',t,18.4,.6,{dy:0});
+  $('s6glow').style.transform=`scale(${1+.04*Math.sin(t*2.2)})`;
+  $('s6glow').style.opacity=clamp((t-16.9)/.5);
+};
+
+/* safe-area guide overlay (debug): ?guides=1  — top 150 / bottom 380 / right 120 */
+if(/guides=1/.test(location.search)){
+  const g=$('guides');g.style.display='block';
+  g.innerHTML=`<div style="left:0;top:0;width:1080px;height:150px"></div><div style="left:0;top:${H-380}px;width:1080px;height:380px"></div><div style="left:${W-120}px;top:150px;width:120px;height:${H-530}px"></div>`;
+}
+
+/* export script waits on this: fonts for every glyph used + all images decoded */
+window.ready=(async()=>{
+  const text=document.body.textContent;
+  await Promise.all([500,700].map(w=>document.fonts.load(`${w} 40px "Noto Sans JP"`,text)));
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+  window.setTime(0);
+  return true;
+})();
+window.setTime(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "nobiru-short",
+  "private": true,
+  "description": "株ノートNOBIRU YouTubeショート動画の書き出し用",
+  "dependencies": {
+    "@fontsource/noto-sans-jp": "5.3.1"
+  }
+}
